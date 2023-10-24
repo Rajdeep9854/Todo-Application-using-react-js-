@@ -3,7 +3,8 @@ import Todos from "./component/Todos";
 
 function App() {
   const [input1,setInput1]=useState('')
-  const [tasks,setTasks] =useState([]);
+  let [tasks,setTasks] =useState([]);
+  
   
   function changeInput(e){
     setInput1(e.target.value)
@@ -12,6 +13,16 @@ function App() {
   function addtask(){
     setTasks([...tasks,input1])
     console.log(tasks);
+  }
+  const  handleTask=(id)=>{
+   // tasks=tasks.filter((task)=>task!==id)
+    //const newTasks = tasks.filter((task) => task[id] !== task)
+    //console.log(newTasks);
+    //setTasks(newTasks)
+    console.log(tasks[id]); 
+    setTasks(tasks.filter((task) => task[id] !== task));
+    console.log(tasks);
+    
   }
 
   return (
@@ -41,9 +52,12 @@ function App() {
         <div >
           {
             tasks.map((value,ind)=>{
-              return (<Todos value={value} id={ind} />)
+              return (<Todos value={value} id={ind} deleteTask={handleTask} />)
             })
           }
+        </div>
+        <div id="deleteAllTask">
+          
         </div>
        
       </div>
